@@ -319,7 +319,8 @@ input[type="file"]::file-selector-button {
   text-decoration: none;
   color: var(--ink);
 }
-.logo-mark { width: 30px; height: 16px; fill: color-mix(in srgb, var(--ink) 35%, transparent); }
+.brand { flex: none; }
+.logo-mark { flex: none; width: 30px; height: 16px; fill: color-mix(in srgb, var(--ink) 35%, transparent); }
 .logo-mark .tick-on { fill: var(--accent); }
 
 /* Score groups */
@@ -428,6 +429,13 @@ input[type="file"]::file-selector-button {
 
 @media (max-width: 860px) {
   .nav-links { display: none; }
+}
+.nav-link { white-space: nowrap; }
+@media (max-width: 420px) {
+  .nav-row { gap: 12px; }
+  .nav-cta { gap: 4px; }
+  .nav-link { padding: 8px; }
+  .nav-cta .btn { padding: 0 16px; }
 }
 
 /* Hero */
