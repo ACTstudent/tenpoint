@@ -1,0 +1,243 @@
+Response ID,Score,Comment,Person Email,Created At,Tags
+48406,10,,k.fontaine@example.com,2023-03-02 11:05:14,
+48291,9,Exactly what I needed.,k.fontaine@example.com,2023-03-03 00:08:02,web
+48407,7,,m.okafor@example.com,2023-03-15 11:55:38,
+48226,4,Checkout kept failing on my phone.,,2023-03-16 10:07:47,
+48360,7,,,2023-03-18 10:57:32,
+48418,9,Support answered within the hour.,k.fontaine@example.com,2023-03-25 23:07:55,
+48300,10,"Fast delivery, would order again.",jen.alvarez@example.com,2023-04-04 07:29:21,
+48327,6,,luis.ortega@example.com,2023-04-09 21:13:27,
+48338,7,,r.dimaano@example.com,2023-04-11 02:46:24,
+48441,10,Great value for the price.,jen.alvarez@example.com,2023-04-12 16:28:25,web
+48414,9,"Fast delivery, would order again.",,2023-04-13 06:21:04,
+48337,1,"Charged twice, still waiting on a refund.",priya.s@example.com,2023-04-27 19:57:06,
+48388,4,Took two weeks to arrive.,,2023-04-28 20:48:47,web
+48214,9,"Fast delivery, would order again.",jen.alvarez@example.com,2023-05-14 17:21:05,web
+48289,7,,jen.alvarez@example.com,2023-05-15 15:57:23,
+48306,8,,,2023-05-26 21:54:53,web
+48302,10,Exactly what I needed.,,2023-05-28 03:35:36,
+48440,8,Took a while to arrive.,k.fontaine@example.com,2023-06-07 20:11:49,
+48242,9,Great value for the price.,luis.ortega@example.com,2023-06-11 22:16:46,web
+48227,9,Support answered within the hour.,,2023-06-29 16:28:22,
+48435,7,Took a while to arrive.,,2023-06-30 20:04:40,
+48343,10,Exactly what I needed.,,2023-07-05 16:49:21,web
+48433,9,,jen.alvarez@example.com,2023-07-12 16:51:15,web
+48256,9,Love the new app.,luis.ortega@example.com,2023-07-25 19:07:09,web
+48288,10,,r.dimaano@example.com,2023-07-31 09:04:56,
+48267,9,"Fast delivery, would order again.",,2023-08-03 10:39:19,web
+48245,9,,,2023-08-06 10:59:07,
+48232,8,,r.dimaano@example.com,2023-08-06 14:07:15,
+48243,5,Packaging was damaged.,,2023-08-23 16:54:44,
+48308,9,Support answered within the hour.,,2023-08-26 13:02:43,
+48318,9,"Fast delivery, would order again.",jen.alvarez@example.com,2023-09-01 17:38:17,
+48346,10,"Fast delivery, would order again.",,2023-09-05 15:14:06,web
+48400,7,Took a while to arrive.,t.nakamura@example.com,2023-09-15 14:32:25,
+48386,9,Love the new app.,m.okafor@example.com,2023-09-15 22:05:24,
+48312,8,"Good, but shipping costs are high.",r.dimaano@example.com,2023-09-20 04:53:06,
+48228,8,Took a while to arrive.,,2023-09-22 16:07:04,
+48371,10,"Fast delivery, would order again.",luis.ortega@example.com,2023-09-23 03:56:44,
+48266,9,"Fast delivery, would order again.",ben.whitlock@example.com,2023-10-02 11:06:02,web
+48423,8,Took a while to arrive.,,2023-10-12 02:29:50,web
+48397,10,Love the new app.,luis.ortega@example.com,2023-10-17 01:46:57,
+48324,9,Love the new app.,,2023-10-17 05:09:08,
+48450,6,,,2023-10-19 15:14:05,web
+48342,9,Support answered within the hour.,,2023-11-08 06:41:56,
+48417,8,Took a while to arrive.,,2023-11-09 19:25:43,
+48347,10,Great value for the price.,luis.ortega@example.com,2023-12-04 09:25:02,
+48412,7,"Good, but shipping costs are high.",ben.whitlock@example.com,2023-12-04 16:04:04,web
+48272,7,Fine. The sizing runs small.,m.okafor@example.com,2023-12-31 06:27:24,web
+48384,3,Hard to find the return policy.,m.okafor@example.com,2024-01-03 03:30:05,
+48247,9,"Fast delivery, would order again.",m.okafor@example.com,2024-01-08 09:18:27,
+48449,7,Took a while to arrive.,,2024-01-09 02:44:57,web
+48350,7,Fine. The sizing runs small.,,2024-01-09 18:38:40,web
+48358,9,"Fast delivery, would order again.",,2024-02-01 22:15:14,
+48314,6,Hard to find the return policy.,r.dimaano@example.com,2024-02-06 00:56:46,web
+48260,8,Took a while to arrive.,k.fontaine@example.com,2024-02-09 19:04:34,
+48263,9,,,2024-02-11 19:31:57,
+48240,7,Fine. The sizing runs small.,,2024-02-17 02:48:48,
+48451,,Clicked by mistake,,2024-05-02 10:11:00,
+48216,7,Took a while to arrive.,t.nakamura@example.com,2024-02-22 06:24:54,web
+48432,9,Great value for the price.,,2024-03-03 23:01:02,
+48353,9,Great value for the price.,,2024-03-10 19:56:13,
+48390,10,Great value for the price.,,2024-03-18 17:33:56,
+48389,1,Packaging was damaged.,luis.ortega@example.com,2024-03-21 02:57:49,web
+48217,7,,luis.ortega@example.com,2024-04-01 03:14:12,
+48428,10,Exactly what I needed.,,2024-04-01 18:36:52,web
+48317,10,,,2024-04-16 16:17:34,web
+48311,1,Took two weeks to arrive.,priya.s@example.com,2024-04-17 06:16:12,web
+48305,7,,,2024-04-18 14:44:03,
+48398,7,Took a while to arrive.,t.nakamura@example.com,2024-04-21 07:52:51,
+48244,4,"Charged twice, still waiting on a refund.",,2024-04-27 00:53:08,
+48402,7,"Good, but shipping costs are high.",r.dimaano@example.com,2024-05-01 03:20:12,web
+48383,8,Fine. The sizing runs small.,,2024-05-09 09:38:18,web
+48328,10,Great value for the price.,ben.whitlock@example.com,2024-05-11 03:59:24,
+48309,10,Support answered within the hour.,,2024-05-27 18:40:33,web
+48222,9,"Fast delivery, would order again.",t.nakamura@example.com,2024-05-29 09:50:43,
+48304,10,Love the new app.,priya.s@example.com,2024-05-30 15:24:30,
+48330,9,Love the new app.,jen.alvarez@example.com,2024-05-30 17:35:03,
+48287,10,,,2024-06-11 22:24:32,web
+48364,9,,r.dimaano@example.com,2024-06-19 13:09:08,
+48373,5,"Charged twice, still waiting on a refund.",jen.alvarez@example.com,2024-06-22 14:50:40,
+48301,10,Love the new app.,,2024-06-28 18:00:46,web
+48273,8,"Good, but shipping costs are high.",,2024-06-30 21:45:13,
+48448,9,Love the new app.,jen.alvarez@example.com,2024-07-01 01:07:06,web
+48252,10,,,2024-07-01 09:17:50,
+48379,6,Took two weeks to arrive.,t.nakamura@example.com,2024-07-01 17:24:21,
+48392,10,Support answered within the hour.,ben.whitlock@example.com,2024-07-02 05:13:33,
+48427,8,Fine. The sizing runs small.,,2024-07-05 09:46:28,
+48362,7,Took a while to arrive.,k.fontaine@example.com,2024-07-18 01:54:38,web
+48321,7,Fine. The sizing runs small.,,2024-07-29 03:21:20,
+48413,9,,luis.ortega@example.com,2024-08-05 05:08:58,
+48220,9,Love the new app.,k.fontaine@example.com,2024-08-15 13:16:45,
+48219,10,Support answered within the hour.,,2024-08-19 15:37:16,
+48446,5,Checkout kept failing on my phone.,k.fontaine@example.com,2024-08-21 23:20:31,
+48355,7,,luis.ortega@example.com,2024-08-29 17:30:04,
+48213,9,"Fast delivery, would order again.",priya.s@example.com,2024-08-30 07:43:38,
+48211,10,Exactly what I needed.,k.fontaine@example.com,2024-09-03 20:32:52,
+48223,9,Love the new app.,t.nakamura@example.com,2024-09-17 08:45:23,
+48447,8,Took a while to arrive.,,2024-09-17 21:53:21,
+48295,6,Took two weeks to arrive.,priya.s@example.com,2024-09-19 05:00:00,
+48340,8,Took a while to arrive.,priya.s@example.com,2024-09-30 09:45:48,
+48401,10,Exactly what I needed.,,2024-10-05 04:47:24,
+48282,9,Love the new app.,,2024-10-07 01:21:38,
+48294,9,Exactly what I needed.,,2024-10-10 04:35:53,
+48381,10,,t.nakamura@example.com,2024-10-10 11:02:25,
+48345,9,,m.okafor@example.com,2024-10-13 09:10:27,
+48380,7,Fine. The sizing runs small.,t.nakamura@example.com,2024-10-16 07:05:25,web
+48395,10,Great value for the price.,priya.s@example.com,2024-10-17 07:53:44,
+48349,7,Took a while to arrive.,ben.whitlock@example.com,2024-10-29 22:49:34,
+48238,8,Fine. The sizing runs small.,ben.whitlock@example.com,2024-11-04 07:31:59,web
+48268,7,"Good, but shipping costs are high.",jen.alvarez@example.com,2024-11-10 07:24:33,
+48344,10,Love the new app.,luis.ortega@example.com,2024-11-21 15:28:58,web
+48234,7,Took a while to arrive.,luis.ortega@example.com,2024-11-25 12:23:08,
+48444,10,Great value for the price.,luis.ortega@example.com,2024-11-26 14:24:16,
+48409,10,"Fast delivery, would order again.",,2024-12-01 22:16:12,
+48382,8,,,2024-12-06 14:30:36,web
+48442,10,Support answered within the hour.,luis.ortega@example.com,2024-12-24 14:00:52,
+48221,7,Fine. The sizing runs small.,,2025-01-05 23:23:13,
+48229,9,Support answered within the hour.,t.nakamura@example.com,2025-01-11 11:45:03,
+48399,7,"Good, but shipping costs are high.",luis.ortega@example.com,2025-01-13 05:22:33,
+48253,9,Exactly what I needed.,k.fontaine@example.com,2025-01-13 08:56:15,web
+48257,10,Great value for the price.,jen.alvarez@example.com,2025-01-20 03:24:16,
+48292,9,,m.okafor@example.com,2025-01-21 06:10:37,web
+48408,10,Love the new app.,luis.ortega@example.com,2025-01-28 05:26:05,web
+48361,9,,ben.whitlock@example.com,2025-02-01 12:54:19,web
+48424,7,"Good, but shipping costs are high.",,2025-02-02 20:59:51,web
+48438,6,Took two weeks to arrive.,t.nakamura@example.com,2025-02-04 18:12:31,
+48250,10,"Fast delivery, would order again.",priya.s@example.com,2025-02-05 17:43:52,web
+48231,9,,t.nakamura@example.com,2025-02-06 20:29:37,
+48279,9,,priya.s@example.com,2025-02-25 01:54:14,
+48357,1,Took two weeks to arrive.,r.dimaano@example.com,2025-02-25 04:28:56,
+48452,N/A,,,2025-01-17 16:40:00,
+48403,10,Support answered within the hour.,ben.whitlock@example.com,2025-02-26 11:52:58,
+48366,9,Great value for the price.,priya.s@example.com,2025-03-01 23:07:02,
+48396,7,"Good, but shipping costs are high.",,2025-03-02 21:20:42,
+48426,9,Exactly what I needed.,luis.ortega@example.com,2025-03-04 15:53:13,
+48246,6,Hard to find the return policy.,,2025-03-15 06:57:01,
+48303,9,Support answered within the hour.,,2025-03-18 05:54:57,
+48374,4,,,2025-04-01 11:35:58,web
+48265,3,Packaging was damaged.,r.dimaano@example.com,2025-04-02 11:19:37,
+48370,7,Fine. The sizing runs small.,,2025-04-06 18:40:58,
+48290,9,Exactly what I needed.,,2025-04-16 22:31:34,
+48421,10,"Fast delivery, would order again.",luis.ortega@example.com,2025-04-17 02:53:18,
+48293,8,Took a while to arrive.,m.okafor@example.com,2025-04-24 05:29:22,
+48315,1,Took two weeks to arrive.,t.nakamura@example.com,2025-04-27 03:10:25,
+48271,9,Love the new app.,r.dimaano@example.com,2025-04-29 16:38:55,
+48241,9,Exactly what I needed.,,2025-05-04 01:35:22,web
+48410,9,Support answered within the hour.,t.nakamura@example.com,2025-05-04 02:02:47,
+48378,10,Great value for the price.,,2025-05-09 08:56:15,
+48255,9,"Fast delivery, would order again.",,2025-05-12 05:23:44,
+48270,10,Support answered within the hour.,,2025-05-18 10:48:45,
+48286,6,"Charged twice, still waiting on a refund.",t.nakamura@example.com,2025-05-21 14:54:22,web
+48415,10,Exactly what I needed.,r.dimaano@example.com,2025-05-27 03:17:43,web
+48322,8,"Good, but shipping costs are high.",ben.whitlock@example.com,2025-06-07 13:12:18,
+48439,10,Exactly what I needed.,luis.ortega@example.com,2025-06-07 20:40:31,
+48325,10,Support answered within the hour.,luis.ortega@example.com,2025-06-22 21:14:44,web
+48299,7,Took a while to arrive.,,2025-07-05 18:02:05,
+48372,8,,m.okafor@example.com,2025-07-08 12:48:36,
+48431,9,"Fast delivery, would order again.",r.dimaano@example.com,2025-07-12 10:00:18,web
+48307,8,Fine. The sizing runs small.,ben.whitlock@example.com,2025-07-13 20:51:32,
+48251,6,"Charged twice, still waiting on a refund.",,2025-07-22 04:33:10,
+48445,10,,,2025-07-25 17:30:45,
+48224,8,Fine. The sizing runs small.,,2025-07-27 11:25:20,
+48280,9,,luis.ortega@example.com,2025-08-03 20:43:52,
+48376,8,Fine. The sizing runs small.,jen.alvarez@example.com,2025-08-04 22:19:37,
+48258,7,Fine. The sizing runs small.,,2025-08-07 04:11:51,web
+48367,10,"Fast delivery, would order again.",ben.whitlock@example.com,2025-08-08 00:01:46,web
+48278,9,"Fast delivery, would order again.",m.okafor@example.com,2025-08-11 17:49:39,web
+48248,8,"Good, but shipping costs are high.",,2025-08-20 04:24:42,web
+48369,10,"Fast delivery, would order again.",jen.alvarez@example.com,2025-08-28 01:50:07,
+48261,6,Took two weeks to arrive.,,2025-09-01 11:51:22,
+48236,8,"Good, but shipping costs are high.",,2025-09-12 18:52:15,web
+48274,8,Fine. The sizing runs small.,,2025-09-15 23:09:56,
+48237,9,Great value for the price.,,2025-09-26 23:05:59,
+48387,10,Support answered within the hour.,,2025-10-09 20:19:01,web
+48320,7,Fine. The sizing runs small.,m.okafor@example.com,2025-10-15 22:23:44,
+48341,8,Fine. The sizing runs small.,luis.ortega@example.com,2025-11-09 10:22:17,web
+48365,9,Support answered within the hour.,jen.alvarez@example.com,2025-11-09 17:11:42,
+48375,4,Checkout kept failing on my phone.,,2025-11-09 21:54:45,
+48329,3,"Charged twice, still waiting on a refund.",,2025-11-16 09:39:29,
+48230,7,"Good, but shipping costs are high.",,2025-11-20 10:17:38,
+48284,9,,t.nakamura@example.com,2025-11-23 13:51:33,web
+48212,9,,t.nakamura@example.com,2025-12-13 09:49:58,
+48436,10,,,2025-12-15 20:25:24,web
+48333,7,,luis.ortega@example.com,2025-12-21 02:40:50,
+48331,5,Hard to find the return policy.,,2025-12-21 15:46:12,web
+48359,10,,,2025-12-23 10:49:56,
+48275,10,Great value for the price.,k.fontaine@example.com,2025-12-29 03:12:52,
+48443,10,,,2026-01-02 20:56:15,web
+48316,8,Fine. The sizing runs small.,,2026-01-20 08:26:02,web
+48254,7,"Good, but shipping costs are high.",luis.ortega@example.com,2026-01-22 16:34:19,
+48437,10,,ben.whitlock@example.com,2026-01-22 22:12:01,
+48215,7,Took a while to arrive.,r.dimaano@example.com,2026-01-23 11:56:07,
+48218,9,Support answered within the hour.,,2026-01-24 01:19:09,
+48385,9,Love the new app.,t.nakamura@example.com,2026-01-27 02:09:31,web
+48334,10,Love the new app.,ben.whitlock@example.com,2026-01-27 09:36:23,
+48323,10,Great value for the price.,,2026-02-05 00:14:54,
+48281,10,,priya.s@example.com,2026-02-09 19:34:47,
+48405,9,Exactly what I needed.,,2026-02-26 11:54:40,
+48425,10,,k.fontaine@example.com,2026-02-28 05:30:59,
+48348,7,"Good, but shipping costs are high.",t.nakamura@example.com,2026-03-14 11:45:09,
+48393,9,Great value for the price.,ben.whitlock@example.com,2026-03-15 20:45:53,
+48411,9,"Fast delivery, would order again.",k.fontaine@example.com,2026-03-19 16:18:30,
+48297,10,"Fast delivery, would order again.",jen.alvarez@example.com,2026-03-20 20:57:19,
+48351,7,,m.okafor@example.com,2026-03-26 04:04:22,
+48404,8,Fine. The sizing runs small.,,2026-03-29 02:22:07,
+48429,8,"Good, but shipping costs are high.",ben.whitlock@example.com,2026-04-01 04:58:31,
+48285,6,Checkout kept failing on my phone.,,2026-04-02 13:26:41,
+48235,7,Fine. The sizing runs small.,priya.s@example.com,2026-04-02 21:29:43,
+48354,10,Great value for the price.,,2026-04-04 12:52:56,
+48420,1,Hard to find the return policy.,r.dimaano@example.com,2026-04-05 05:32:35,
+48352,8,Fine. The sizing runs small.,,2026-04-09 00:36:37,
+48319,10,"Fast delivery, would order again.",,2026-04-30 09:21:21,
+48249,10,Exactly what I needed.,m.okafor@example.com,2026-05-04 19:54:49,web
+48313,9,Exactly what I needed.,,2026-05-05 00:03:12,web
+48430,7,,r.dimaano@example.com,2026-05-09 12:01:30,
+48363,3,Checkout kept failing on my phone.,,2026-05-13 06:50:14,
+48276,3,Took two weeks to arrive.,,2026-05-18 22:35:50,
+48298,6,Took two weeks to arrive.,,2026-05-19 20:28:15,
+48419,6,Packaging was damaged.,luis.ortega@example.com,2026-05-27 12:55:37,web
+48339,8,Fine. The sizing runs small.,r.dimaano@example.com,2026-05-31 03:12:32,
+48269,10,Love the new app.,,2026-06-19 03:41:43,web
+48283,8,,priya.s@example.com,2026-06-19 05:45:50,web
+48391,6,Took two weeks to arrive.,,2026-06-23 09:12:37,
+48233,7,Took a while to arrive.,t.nakamura@example.com,2026-06-28 23:16:15,
+48259,3,Packaging was damaged.,,2026-07-09 03:49:16,
+48264,7,,,2026-07-12 11:20:27,
+48262,8,,,2026-07-14 09:09:47,
+48239,10,Support answered within the hour.,jen.alvarez@example.com,2026-07-17 09:52:16,
+48277,10,Support answered within the hour.,priya.s@example.com,2026-07-17 10:32:20,web
+48326,9,Exactly what I needed.,,2026-07-17 15:54:56,web
+48377,10,"Fast delivery, would order again.",r.dimaano@example.com,2026-07-21 16:57:54,
+48416,9,Great value for the price.,k.fontaine@example.com,2026-08-02 20:41:07,
+48394,9,,,2026-08-08 08:46:36,
+48336,7,,r.dimaano@example.com,2026-08-13 22:56:31,web
+48332,10,"Fast delivery, would order again.",luis.ortega@example.com,2026-08-16 00:55:42,
+48310,7,"Good, but shipping costs are high.",k.fontaine@example.com,2026-09-02 00:36:23,
+48225,9,Great value for the price.,m.okafor@example.com,2026-09-08 23:54:26,
+48422,10,,,2026-09-09 21:08:45,
+48335,8,,,2026-09-11 06:47:51,web
+48368,7,Fine. The sizing runs small.,,2026-09-15 21:09:34,
+48296,9,"Fast delivery, would order again.",,2026-09-17 13:38:13,
+48356,8,Took a while to arrive.,k.fontaine@example.com,2026-09-19 01:19:15,
+48434,7,Took a while to arrive.,,2026-09-19 14:49:49,
