@@ -31,28 +31,29 @@ export function sha256(value) {
   return createHash('sha256').update(value).digest('hex');
 }
 
-export function createSession(db, userId) {
+export async function createSession(db, userId) {
   const raw = token(32);
   const expires = new Date(Date.now() + SESSION_DAYS * 864e5).toISOString();
-  db.prepare('INSERT INTO sessions (token_hash, user_id, expires_at) VALUES (?, ?, ?)').run(sha256(raw), userId, expires);
+  await db.run('INSERT INTO sessions (token_hash, user_id, expires_at) VALUES (?, ?, ?)', [sha256(raw), userId, expires]);
   return { raw, maxAge: SESSION_DAYS * 86400 };
 }
 
-export function sessionUser(db, raw) {
+export async function sessionUser(db, raw) {
   if (!raw) return null;
-  const row = db.prepare(
-    `SELECT u.id, u.email, s.expires_at FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token_hash = ?`
-  ).get(sha256(raw));
+  const row = await db.get(
+    'SELECT u.id, u.email, s.expires_at FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.token_hash = ?',
+    [sha256(raw)]
+  );
   if (!row) return null;
   if (row.expires_at < new Date().toISOString()) {
-    db.prepare('DELETE FROM sessions WHERE token_hash = ?').run(sha256(raw));
+    await db.run('DELETE FROM sessions WHERE token_hash = ?', [sha256(raw)]);
     return null;
   }
   return { id: row.id, email: row.email };
 }
 
-export function endSession(db, raw) {
-  if (raw) db.prepare('DELETE FROM sessions WHERE token_hash = ?').run(sha256(raw));
+export async function endSession(db, raw) {
+  if (raw) await db.run('DELETE FROM sessions WHERE token_hash = ?', [sha256(raw)]);
 }
 
 export function validEmail(email) {

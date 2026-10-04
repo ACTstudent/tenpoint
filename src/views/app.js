@@ -298,9 +298,9 @@ export function importPage({ user, survey, base, imports, flash, error }) {
   const past = imports.map((i) => html`<li class="import-row">
     <div>
       <p class="import-name">${i.file_name || 'Pasted CSV'}</p>
-      <p class="muted small">${plural(i.row_count, 'answer')}${i.first_at ? `, ${fmtDate(i.first_at)} to ${fmtDate(i.last_at)}` : ''}. Imported ${ago(i.created_at)}.</p>
+      <p class="muted small">${plural(Number(i.imported), 'answer')}${i.first_at ? `, ${fmtDate(i.first_at)} to ${fmtDate(i.last_at)}` : ''}. Imported ${ago(i.created_at)}.</p>
     </div>
-    <form method="post" action="/app/surveys/${survey.id}/imports/${i.id}/undo" data-confirm="Remove the ${plural(i.row_count, 'answer')} from this import?">
+    <form method="post" action="/app/surveys/${survey.id}/imports/${i.id}/undo" data-confirm="Remove the ${plural(Number(i.imported), 'answer')} from this import?">
       <button class="btn btn-line btn-sm" type="submit">${icon('trash')}<span>Undo</span></button>
     </form>
   </li>`);

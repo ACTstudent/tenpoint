@@ -864,38 +864,6 @@ input[type="file"]::file-selector-button {
   .cell { min-height: 0; }
 }
 
-/* Pricing */
-
-.plans {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  max-width: 880px;
-}
-.plan {
-  display: grid;
-  align-content: start;
-  gap: 18px;
-  padding: clamp(24px, 3vw, 32px);
-  border: 1px solid var(--line);
-  border-radius: var(--r-card);
-  background: var(--surface);
-}
-.plan-main { border-color: var(--ink); box-shadow: var(--shadow-lg); }
-.plan h3 { font-size: 1.3rem; }
-.plan-desc { color: var(--muted); margin-top: -10px; }
-.price { font: 750 3rem/1 var(--font-display); letter-spacing: -0.04em; }
-.price span { font: 500 1rem var(--font-body); letter-spacing: 0; color: var(--muted); margin-left: 4px; }
-.ticks { display: grid; gap: 10px; list-style: none; padding: 0; }
-.ticks li { display: flex; gap: 10px; align-items: flex-start; }
-.ticks .icon { margin-top: 3px; color: var(--accent); }
-.plan .btn { justify-self: start; }
-.plans-note { margin-top: 20px; color: var(--muted); max-width: 64ch; }
-
-@media (max-width: 720px) {
-  .plans { grid-template-columns: 1fr; }
-}
-
 /* FAQ */
 
 .faq {
@@ -936,8 +904,32 @@ input[type="file"]::file-selector-button {
   text-align: center;
   overflow: clip;
 }
-.final-copy { display: grid; justify-items: center; gap: 28px; }
-.final h2 { max-width: 16ch; }
+.final-copy { display: grid; justify-items: center; gap: 22px; }
+.final h2 { max-width: 24ch; }
+.final-sub { max-width: 48ch; color: var(--ink-2); font-size: 1.1rem; }
+.included {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 720px;
+  margin: 4px 0 8px;
+  padding: 0;
+  list-style: none;
+}
+.included li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+.included .icon { color: var(--accent); }
 .final-scale {
   display: flex;
   justify-content: center;
@@ -1064,6 +1056,9 @@ input[type="file"]::file-selector-button {
 .auth-card .btn-block { margin-top: 24px; }
 .auth-switch { margin-top: 18px; color: var(--muted); font-size: 0.92rem; text-align: center; }
 .auth-switch a { color: var(--accent); font-weight: 600; }
+.setup-card { width: min(100%, 560px); }
+.setup-steps { display: grid; gap: 12px; margin: 0; padding-left: 1.3em; color: var(--ink-2); }
+.setup-steps code, .setup-card code { padding: 1px 5px; border-radius: 6px; background: var(--surface-2); font-size: 0.85em; }
 
 /* ============ App ============ */
 

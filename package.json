@@ -2,15 +2,19 @@
   "name": "tenpoint",
   "version": "0.1.0",
   "private": true,
-  "description": "Simple NPS surveys for small teams, with imports from GetFeedback and Delighted.",
+  "description": "Free, simple NPS surveys for small teams, with imports from GetFeedback and Delighted.",
   "type": "module",
   "engines": {
-    "node": ">=22.13"
+    "node": "22.x"
   },
   "scripts": {
-    "start": "node --disable-warning=ExperimentalWarning server.js",
-    "dev": "node --disable-warning=ExperimentalWarning --watch server.js",
-    "test": "node --disable-warning=ExperimentalWarning --test",
-    "seed": "node --disable-warning=ExperimentalWarning scripts/seed-demo.mjs"
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "build": "node scripts/build.mjs",
+    "test": "node --test",
+    "seed": "node scripts/seed-demo.mjs"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.18.0"
   }
 }

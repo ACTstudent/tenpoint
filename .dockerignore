@@ -1,6 +1,9 @@
 .git
+node_modules
 data
 test
 *.db
 *.db-wal
 *.db-shm
+.vercel
+.env*

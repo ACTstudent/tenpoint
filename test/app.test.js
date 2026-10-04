@@ -11,7 +11,8 @@ let server, base, db;
 const slackCalls = [];
 
 before(async () => {
-  db = openDb(':memory:');
+  // Set TEST_DATABASE_URL (for example to a local libSQL server) to run the same tests over HTTP, as on Vercel.
+  db = await openDb(process.env.TEST_DATABASE_URL || ':memory:');
   const app = createApp({
     db,
     publicDir: join(root, 'public'),
@@ -21,10 +22,13 @@ before(async () => {
     rateLimits: { signup: { limit: 100 }, respond: { limit: 5 } },
   });
   server = createServer(app);
+  // Building the large test upload can take longer than Node's 5 second keep-alive timeout, and fetch
+  // would then reuse a socket the server is closing.
+  server.keepAliveTimeout = 60000;
   await new Promise((r) => server.listen(0, '127.0.0.1', r));
   base = `http://127.0.0.1:${server.address().port}`;
 });
-after(() => { server.close(); db.close(); });
+after(() => { server.closeAllConnections(); server.close(); db.close(); });
 
 // A tiny browser: keeps the session cookie and sends same-origin headers.
 function client() {
@@ -135,7 +139,7 @@ test('widget API: CORS, score first, comment later, one answer', async () => {
   assert.equal(res.status, 403);
   res = await fetch(`${base}/api/r/${pid}/${rid}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token, score: 4, comment: 'Line was long' }) });
   assert.equal(res.status, 200);
-  const rows = db.prepare('SELECT score, comment, source FROM responses WHERE survey_id = ?').all(Number(id));
+  const rows = await db.all('SELECT score, comment, source FROM responses WHERE survey_id = ?', [Number(id)]);
   assert.deepEqual(rows.map((r) => ({ ...r })), [{ score: 4, comment: 'Line was long', source: 'widget' }]);
   res = await fetch(`${base}/api/r/${pid}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ score: 12 }) });
   assert.equal(res.status, 422);
@@ -148,7 +152,7 @@ test('email clicks record the recipient only when it is a real address', async (
   assert.match(await real.text(), /value="ana@example.com"/);
   const tag = await fetch(`${base}/s/${pid}?score=10&src=email&email=*|EMAIL|*`);
   assert.ok(!(await tag.text()).includes('*|EMAIL|*'));
-  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM responses WHERE survey_id = ?').get(Number(id)).n, 0, 'opening the page alone records nothing');
+  assert.equal((await db.get('SELECT COUNT(*) AS n FROM responses WHERE survey_id = ?', [Number(id)])).n, 0, 'opening the page alone records nothing');
 });
 
 test('imports keep dates, block duplicates and can be undone', async () => {
@@ -158,16 +162,16 @@ test('imports keep dates, block duplicates and can be undone', async () => {
   let r = await go(`/app/surveys/${id}/import`, { method: 'POST', form: { csv, file_name: 'old.csv' } });
   assert.equal(r.status, 303);
   assert.match(r.location, /m=imported&n=2&s=1/);
-  const dates = db.prepare("SELECT created_at FROM responses WHERE survey_id = ? AND source = 'import' ORDER BY created_at").all(Number(id)).map((x) => x.created_at);
+  const dates = (await db.all("SELECT created_at FROM responses WHERE survey_id = ? AND source = 'import' ORDER BY created_at", [Number(id)])).map((x) => x.created_at);
   assert.deepEqual(dates, ['2023-03-04T05:06:07.000Z', '2023-04-01T00:00:00.000Z']);
   r = await go(`/app/surveys/${id}/import`, { method: 'POST', form: { csv, file_name: 'old.csv' } });
   assert.equal(r.status, 422);
   assert.match(r.text, /already imported/);
   r = await go(`/app/surveys/${id}/import`, { method: 'POST', form: { csv: 'Name\nBob\n' } });
   assert.match(r.text, /No score column/);
-  const importId = db.prepare('SELECT id FROM imports WHERE survey_id = ?').get(Number(id)).id;
+  const importId = (await db.get('SELECT id FROM imports WHERE survey_id = ?', [Number(id)])).id;
   await go(`/app/surveys/${id}/imports/${importId}/undo`, { method: 'POST' });
-  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM responses WHERE survey_id = ?').get(Number(id)).n, 0);
+  assert.equal((await db.get('SELECT COUNT(*) AS n FROM responses WHERE survey_id = ?', [Number(id)])).n, 0);
 });
 
 test('settings validate colours and Slack URLs, and Slack gets new answers', async () => {
@@ -210,8 +214,11 @@ test('deleting a survey and an account removes the data', async () => {
   assert.equal(r.status, 422);
   r = await go('/app/account/delete', { method: 'POST', form: { password: 'correct horse battery' } });
   assert.equal(r.location, '/');
-  assert.equal(db.prepare("SELECT COUNT(*) AS n FROM users WHERE email = 'leaver@example.com'").get().n, 0);
-  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM surveys s LEFT JOIN users u ON u.id = s.user_id WHERE u.id IS NULL').get().n, 0);
+  assert.equal((await db.get("SELECT COUNT(*) AS n FROM users WHERE email = 'leaver@example.com'")).n, 0);
+  // Nothing is left behind: no orphaned surveys, answers, imports or sessions.
+  assert.equal((await db.get('SELECT COUNT(*) AS n FROM surveys s LEFT JOIN users u ON u.id = s.user_id WHERE u.id IS NULL')).n, 0);
+  assert.equal((await db.get('SELECT COUNT(*) AS n FROM responses r LEFT JOIN surveys s ON s.id = r.survey_id WHERE s.id IS NULL')).n, 0);
+  assert.equal((await db.get('SELECT COUNT(*) AS n FROM sessions x LEFT JOIN users u ON u.id = x.user_id WHERE u.id IS NULL')).n, 0);
 });
 
 test('static files are served and paths cannot escape the public folder', async () => {
@@ -242,4 +249,50 @@ test('an oversized import gets a readable error, and a bad URL is a 404', async 
   assert.equal(r.status, 422);
   assert.match(r.text, /larger than 8 MB/);
   assert.equal((await fetch(`${base}/%E0%A4%A`)).status, 404);
+});
+
+test('big imports go in parts, are checked again on the server, and can be rolled back', async () => {
+  const go = await signedIn('parts@example.com');
+  const { id } = await newSurvey(go);
+  const json = (path, data) => go(path, { method: 'POST', json: data });
+  const hash = 'a'.repeat(64);
+  let r = await json(`/app/surveys/${id}/imports`, { fileHash: hash, fileName: 'export.csv', total: 3 });
+  assert.equal(r.status, 201);
+  const importId = JSON.parse(r.text).id;
+  r = await json(`/app/surveys/${id}/imports`, { fileHash: hash, fileName: 'export.csv', total: 3 });
+  assert.equal(r.status, 409, 'the same file cannot be started twice');
+  r = await json(`/app/surveys/${id}/imports/${importId}/rows`, { rows: [{ score: 11, comment: '', email: '', created_at: '2024-01-01T00:00:00Z' }] });
+  assert.equal(r.status, 422, 'scores outside 0 to 10 are refused');
+  r = await json(`/app/surveys/${id}/imports/${importId}/rows`, { rows: [
+    { score: 9, comment: 'Old fan', email: 'fan@example.com', created_at: '2024-01-01T00:00:00Z' },
+    { score: 3, comment: 'x'.repeat(5000), email: 'not an email', created_at: '2999-01-01T00:00:00Z' },
+  ] });
+  assert.equal(r.status, 200);
+  r = await json(`/app/surveys/${id}/imports/${importId}/rows`, { rows: [{ score: 10, comment: '', email: '', created_at: 'garbage' }] });
+  assert.equal(r.status, 200);
+  const rows = await db.all('SELECT score, comment, email, created_at FROM responses WHERE survey_id = ? ORDER BY id', [Number(id)]);
+  assert.equal(rows.length, 3);
+  assert.deepEqual(rows[0], { score: 9, comment: 'Old fan', email: 'fan@example.com', created_at: '2024-01-01T00:00:00.000Z' });
+  assert.equal(rows[1].comment.length, 2000, 'comments are clipped');
+  assert.equal(rows[1].email, '', 'bad emails are dropped');
+  assert.ok(rows[1].created_at <= new Date().toISOString(), 'future dates become today');
+  const page = await go(`/app/surveys/${id}/import`);
+  assert.match(page.text, /3 answers/);
+  // Another account cannot add rows to this import.
+  const other = await signedIn('parts-other@example.com');
+  r = await other(`/app/surveys/${id}/imports/${importId}/rows`, { method: 'POST', json: { rows: [] } });
+  assert.equal(r.status, 404);
+  await go(`/app/surveys/${id}/imports/${importId}/undo`, { method: 'POST', json: {} });
+  assert.equal((await db.get('SELECT COUNT(*) AS n FROM responses WHERE survey_id = ?', [Number(id)])).n, 0);
+  // A signed-out JSON request gets a JSON answer rather than a redirect.
+  r = await client()(`/app/surveys/${id}/imports`, { method: 'POST', json: { fileHash: hash, total: 1 } });
+  assert.equal(r.status, 401);
+});
+
+test('rate limits are kept in the database, so they hold across server instances', async () => {
+  const { hitRateLimit } = await import('../src/store.js');
+  const cfg = { limit: 2, windowMs: 60000 };
+  assert.deepEqual([await hitRateLimit(db, 'k1', cfg), await hitRateLimit(db, 'k1', cfg), await hitRateLimit(db, 'k1', cfg)], [true, true, false]);
+  assert.equal(await hitRateLimit(db, 'k2', cfg), true, 'keys are counted separately');
+  assert.equal(await hitRateLimit(db, 'k1', { limit: 2, windowMs: -1 }), true, 'an expired window starts again');
 });

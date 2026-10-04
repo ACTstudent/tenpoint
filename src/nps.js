@@ -9,10 +9,9 @@ export function group(score) {
 }
 
 // NPS = % promoters minus % detractors, rounded to a whole number. Null when there is nothing to score.
-export function summarize(scores) {
-  const counts = { promoter: 0, passive: 0, detractor: 0 };
-  for (const s of scores) counts[group(s)]++;
-  const total = scores.length;
+export function summarizeCounts({ promoter = 0, passive = 0, detractor = 0 }) {
+  const counts = { promoter: Number(promoter), passive: Number(passive), detractor: Number(detractor) };
+  const total = counts.promoter + counts.passive + counts.detractor;
   const nps = total ? Math.round(((counts.promoter - counts.detractor) / total) * 100) : null;
   const pct = (n) => (total ? Math.round((n / total) * 100) : 0);
   return {
@@ -21,6 +20,12 @@ export function summarize(scores) {
     counts,
     pct: { promoter: pct(counts.promoter), passive: pct(counts.passive), detractor: pct(counts.detractor) },
   };
+}
+
+export function summarize(scores) {
+  const counts = { promoter: 0, passive: 0, detractor: 0 };
+  for (const s of scores) counts[group(s)]++;
+  return summarizeCounts(counts);
 }
 
 // Monthly NPS for the last `months` calendar months (UTC), oldest first.

@@ -1,14 +1,14 @@
 // Fills a database with a demo account and a year of sample answers for a made-up coffee shop.
-// Usage: DATABASE_PATH=./data/demo.db DEMO_PASSWORD=... node scripts/seed-demo.mjs
-import { openDb } from '../src/db.js';
+// Usage: DATABASE_URL=file:data/demo.db DEMO_PASSWORD=... node scripts/seed-demo.mjs
+// It also works against Turso: set TURSO_DATABASE_URL and TURSO_AUTH_TOKEN instead.
+import { openDb, databaseUrlFromEnv, databaseTokenFromEnv } from '../src/db.js';
 import { hashPassword, token } from '../src/auth.js';
 import * as store from '../src/store.js';
-import { tx } from '../src/db.js';
 
-const file = process.env.DATABASE_PATH || './data/demo.db';
+const url = databaseUrlFromEnv() || 'file:data/demo.db';
 const email = process.env.DEMO_EMAIL || 'demo@example.com';
 const password = process.env.DEMO_PASSWORD || token(12);
-const db = openDb(file);
+const db = await openDb(url, databaseTokenFromEnv());
 
 // Small deterministic random generator so every run makes the same data.
 let seed = 20261004;
@@ -49,12 +49,12 @@ function scoreFor(target) {
 }
 
 const now = new Date();
-let user = store.userByEmail(db, email);
-if (user) store.deleteUser(db, user.id);
-const userId = store.createUser(db, email, hashPassword(password));
-const surveyId = store.createSurvey(db, userId, { name: 'Customer NPS', brand: 'Copperline Coffee' });
-store.createSurvey(db, userId, { name: 'Catering orders', brand: 'Copperline Coffee' });
-const survey = db.prepare('SELECT * FROM surveys WHERE id = ?').get(surveyId);
+const existing = await store.userByEmail(db, email);
+if (existing) await store.deleteUser(db, existing.id);
+const userId = await store.createUser(db, email, hashPassword(password));
+await store.createSurvey(db, userId, { name: 'Catering orders', brand: 'Copperline Coffee' });
+const surveyId = await store.createSurvey(db, userId, { name: 'Customer NPS', brand: 'Copperline Coffee' });
+const survey = await db.get('SELECT * FROM surveys WHERE id = ?', [surveyId]);
 
 // Older answers arrive through an import; the last few months come in live.
 const imported = [];
@@ -74,13 +74,18 @@ for (let m = 15; m >= 0; m--) {
   }
 }
 
-tx(db, () => {
-  const imp = db.prepare('INSERT INTO imports (survey_id, file_hash, file_name, row_count, created_at) VALUES (?, ?, ?, ?, ?)')
-    .run(surveyId, 'demo-import', 'getfeedback-responses-2025.csv', imported.length, new Date(now - 140 * 864e5).toISOString());
-  const ins = db.prepare(`INSERT INTO responses (survey_id, score, comment, email, source, import_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)`);
-  for (const r of imported) ins.run(surveyId, r.score, r.comment, r.email, 'import', imp.lastInsertRowid, r.created_at);
-  for (const r of live) ins.run(surveyId, r.score, r.comment, r.email, r.source, null, r.created_at);
-});
+const importId = await store.createImport(db, surveyId, { fileHash: 'demo-import', fileName: 'getfeedback-responses-2025.csv', total: imported.length });
+await db.run('UPDATE imports SET created_at = ? WHERE id = ?', [new Date(now - 140 * 864e5).toISOString(), importId]);
+await store.addImportRows(db, surveyId, importId, imported);
+const liveInserts = [];
+for (let i = 0; i < live.length; i += 100) {
+  const chunk = live.slice(i, i + 100);
+  liveInserts.push([
+    `INSERT INTO responses (survey_id, score, comment, email, source, created_at) VALUES ${chunk.map(() => '(?, ?, ?, ?, ?, ?)').join(', ')}`,
+    chunk.flatMap((r) => [surveyId, r.score, r.comment, r.email, r.source, r.created_at]),
+  ]);
+}
+await db.batch(liveInserts);
 
 // A handful of very recent answers so the list reads like a live inbox.
 const recent = [
@@ -90,12 +95,15 @@ const recent = [
   [7, 'Pastries sell out before noon.', 'email', 310],
 ];
 for (const [score, comment, source, minsAgo] of recent) {
-  db.prepare('INSERT INTO responses (survey_id, score, comment, email, source, created_at) VALUES (?, ?, ?, ?, ?, ?)')
-    .run(surveyId, score, comment, source === 'widget' ? '' : `${pick(NAMES)}@example.com`, source, new Date(now - minsAgo * 60000).toISOString());
+  await db.run(
+    'INSERT INTO responses (survey_id, score, comment, email, source, created_at) VALUES (?, ?, ?, ?, ?, ?)',
+    [surveyId, score, comment, source === 'widget' ? '' : `${pick(NAMES)}@example.com`, source, new Date(now - minsAgo * 60000).toISOString()]
+  );
 }
 
-const total = db.prepare('SELECT COUNT(*) AS n FROM responses WHERE survey_id = ?').get(surveyId).n;
-console.log(`Seeded ${file}`);
+const total = (await db.get('SELECT COUNT(*) AS n FROM responses WHERE survey_id = ?', [surveyId])).n;
+db.close();
+console.log(`Seeded ${url}`);
 console.log(`  login:    ${email}`);
 console.log(`  password: ${password}`);
 console.log(`  survey:   /s/${survey.public_id} (${total} answers)`);

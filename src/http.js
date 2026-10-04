@@ -170,22 +170,6 @@ export function fileVersion(...buffers) {
   return h.digest('base64url').slice(0, 10);
 }
 
-// Fixed-window counter kept in memory. Good enough for one process.
-export function rateLimiter({ limit, windowMs }) {
-  const hits = new Map();
-  return function allow(key) {
-    const t = Date.now();
-    const e = hits.get(key);
-    if (!e || t - e.start > windowMs) {
-      hits.set(key, { start: t, n: 1 });
-      if (hits.size > 50000) for (const [k, v] of hits) if (t - v.start > windowMs) hits.delete(k);
-      return true;
-    }
-    e.n++;
-    return e.n <= limit;
-  };
-}
-
 export function clientIp(req, trustProxy) {
   if (trustProxy) {
     const fwd = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim();

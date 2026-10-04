@@ -4,3 +4,6 @@ data/
 *.db-wal
 *.db-shm
 .DS_Store
+.vercel
+.env*
+public/lib/

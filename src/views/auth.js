@@ -28,7 +28,7 @@ export function signupPage({ values, error } = {}) {
   return authPage({
     title: 'Create your account | Tenpoint',
     heading: 'Create your account',
-    sub: 'Free during early access. No card needed.',
+    sub: 'Tenpoint is free. No card needed.',
     action: '/signup',
     submit: 'Create account',
     values,

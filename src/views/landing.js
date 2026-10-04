@@ -45,6 +45,8 @@ const TOUR = [
   },
 ];
 
+const INCLUDED = ['Unlimited surveys', 'Unlimited answers', 'Email buttons', 'Site widget', 'CSV import', 'Slack alerts', 'CSV export', 'Your name and colour'];
+
 const SWATCHES = [
   ['#1d7a50', 'Green'],
   ['#2f5bd3', 'Blue'],
@@ -85,7 +87,7 @@ export function landing({ user }) {
     <nav class="nav-links" aria-label="Sections">
       <a href="#tour">Tour</a>
       <a href="#switch">Switching</a>
-      <a href="#pricing">Pricing</a>
+      <a href="#free">Free</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-cta">${authLinks}</div>
@@ -99,7 +101,7 @@ export function landing({ user }) {
         <span class="line" style="--l:0"><span>Ask one question.</span></span>
         <span class="line" style="--l:1"><span>Keep <span class="mark">every answer</span>.</span></span>
       </h1>
-      <p class="lead">NPS surveys for small teams. Send them by link, email or site widget, and see the score move each month.</p>
+      <p class="lead">Free NPS surveys for small teams. Send them by link, email or site widget, then watch your score move.</p>
       <div class="hero-actions">
         <a class="btn btn-dark btn-lg" href="/signup">Start free ${icon('arrow-right')}</a>
         <a class="btn btn-line btn-lg" href="#tour">See the tour</a>
@@ -238,48 +240,16 @@ export function landing({ user }) {
     </div>
   </section>
 
-  <section class="section section-tint" id="pricing">
-    <div class="wrap">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">Pricing</p>
-        <h2>One flat price, not a price per seat.</h2>
-        <p>Tenpoint is free for everyone during early access.</p>
-      </div>
-      <div class="plans">
-        <article class="plan" data-reveal>
-          <h3>Free</h3>
-          <p class="plan-desc">For a first survey.</p>
-          <p class="price">$0</p>
-          <ul class="ticks">
-            <li>${icon('check')}100 answers a month</li>
-            <li>${icon('check')}1 survey</li>
-            <li>${icon('check')}Link, email buttons and widget</li>
-            <li>${icon('check')}CSV export</li>
-          </ul>
-        </article>
-        <article class="plan plan-main" data-reveal>
-          <h3>Team</h3>
-          <p class="plan-desc">For a business that asks every customer.</p>
-          <p class="price">$24<span>/month</span></p>
-          <ul class="ticks">
-            <li>${icon('check')}Unlimited answers and surveys</li>
-            <li>${icon('check')}Imports from GetFeedback, Delighted or any CSV</li>
-            <li>${icon('check')}Slack alerts</li>
-            <li>${icon('check')}Your name and colour on every survey</li>
-          </ul>
-          <a class="btn btn-dark" href="/signup">Start free</a>
-        </article>
-      </div>
-      <p class="plans-note" data-reveal>Paid plans haven't started yet. You'll get an email a month before they do, and nothing is charged without you choosing a plan.</p>
-    </div>
-  </section>
-
   <section class="section" id="faq">
     <div class="wrap faq">
       <div class="faq-head" data-reveal>
         <h2>Questions before you switch.</h2>
       </div>
       <div class="faq-list" data-reveal>
+        <details>
+          <summary>Is it really free?${icon('plus')}</summary>
+          <p>Yes. There are no paid plans, no card to enter and no limit on surveys or answers. Every feature on this page is included.</p>
+        </details>
         <details>
           <summary>Which files can I import?${icon('plus')}</summary>
           <p>Any CSV with a column of scores from 0 to 10. Tenpoint looks for columns named like Score, Rating or NPS, plus Comment, Email and a date. Exports from GetFeedback and Delighted work as they are.</p>
@@ -304,10 +274,14 @@ export function landing({ user }) {
     </div>
   </section>
 
-  <section class="final">
+  <section class="final" id="free">
     <div class="final-scale" aria-hidden="true" data-reveal>${finalScale}</div>
     <div class="wrap final-copy">
-      <h2 data-reveal>Ask your first question today.</h2>
+      <h2 data-reveal>Everything is free.</h2>
+      <p class="final-sub" data-reveal>No plans, no card and no cap on surveys or answers.</p>
+      <ul class="included" aria-label="Included for free" data-reveal>
+        ${INCLUDED.map((item) => html`<li>${icon('check')}${item}</li>`)}
+      </ul>
       <a class="btn btn-dark btn-lg" href="/signup" data-reveal>Start free ${icon('arrow-right')}</a>
     </div>
   </section>
@@ -316,9 +290,9 @@ export function landing({ user }) {
 <footer class="site-foot">
   <div class="wrap foot-row">
     ${brand()}
-    <span>Simple NPS surveys for small teams.</span>
+    <span>Free, simple NPS surveys for small teams.</span>
     <nav class="foot-links" aria-label="Footer">
-      <a href="#pricing">Pricing</a>
+      <a href="#free">Free</a>
       <a href="#faq">FAQ</a>
       <a href="/login">Log in</a>
     </nav>
@@ -326,8 +300,8 @@ export function landing({ user }) {
 </footer>`;
 
   return page({
-    title: 'Tenpoint: simple NPS surveys for small teams',
-    description: 'Ask customers one question, read every answer, and import your history from GetFeedback or Delighted.',
+    title: 'Tenpoint: free NPS surveys for small teams',
+    description: 'Free NPS surveys for small teams. Ask customers one question, read every answer, and import your history from GetFeedback or Delighted.',
     body,
     bodyClass: 'landing',
     scripts: ['/landing.js'],
