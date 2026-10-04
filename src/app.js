@@ -32,7 +32,7 @@ const CORS = {
 // for a comment before going to Slack, so the channel gets one message instead of two.
 const SLACK_HOLD_MS = 90 * 1000;
 
-const ASSETS = ['styles.css', 'boot.js', 'app.js', 'landing.js', 'survey.js', 'share.js', 'import.js', 'widget.js', 'icons.svg'];
+const ASSETS = ['styles.css', 'theme.js', 'boot.js', 'app.js', 'landing.js', 'survey.js', 'share.js', 'import.js', 'widget.js', 'icons.svg'];
 
 export function createApp({
   db, publicDir, srcDir, baseUrl = '', secureCookies = false, trustProxy = false, fetchImpl = fetch, log = console,

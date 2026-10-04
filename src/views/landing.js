@@ -1,4 +1,4 @@
-import { html, raw, icon, page, brand } from '../html.js';
+import { html, raw, icon, page, brand, themeToggle } from '../html.js';
 import { emailSnippet } from '../snippet.js';
 import { scaleInputs } from './survey.js';
 
@@ -56,9 +56,9 @@ const SWATCHES = [
 ];
 
 function shot(key, alt, eager) {
+  // theme.js swaps in the dark screenshot when dark mode is on.
   return html`<picture>
-    <source media="(prefers-color-scheme: dark)" srcset="/shots/tour-${key}-dark.webp">
-    <img src="/shots/tour-${key}-light.webp" width="1600" height="1000" alt="${alt}"${eager ? '' : raw(' loading="lazy"')} decoding="async">
+    <img src="/shots/tour-${key}-light.webp" data-src-light="/shots/tour-${key}-light.webp" data-src-dark="/shots/tour-${key}-dark.webp" width="1600" height="1000" alt="${alt}"${eager ? '' : raw(' loading="lazy"')} decoding="async">
   </picture>`;
 }
 
@@ -90,7 +90,7 @@ export function landing({ user }) {
       <a href="#free">Free</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <div class="nav-cta">${authLinks}</div>
+    <div class="nav-cta">${themeToggle()}${authLinks}</div>
   </div>
 </header>
 

@@ -1,4 +1,4 @@
-import { html, raw, page, brand, icon, plural, fmtDate, fmtMonth, ago, signed, textOn } from '../html.js';
+import { html, raw, page, brand, icon, plural, fmtDate, fmtMonth, ago, signed, textOn, themeToggle } from '../html.js';
 import { group } from '../nps.js';
 import { emailSnippet, widgetSnippet, surveyUrl } from '../snippet.js';
 import { scaleInputs } from './survey.js';
@@ -17,6 +17,7 @@ function shell({ user, title, body, scripts = [] }) {
       <a href="/app">Surveys</a>
       <a href="/app/account">${user.email}</a>
       <form method="post" action="/logout"><button class="link-btn" type="submit">${icon('sign-out')}<span>Log out</span></button></form>
+      ${themeToggle()}
     </nav>
   </div>
 </header>

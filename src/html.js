@@ -47,7 +47,8 @@ export function brand(href = '/') {
   return html`<a class="brand" href="${href}" aria-label="Tenpoint home">${logo}<span>Tenpoint</span></a>`;
 }
 
-export function page({ title, description = '', body, bodyClass = '', scripts = [], blocking = [], preload = [] }) {
+// Customer-facing survey pages pass themed: false so they always show the business's light design.
+export function page({ title, description = '', body, bodyClass = '', scripts = [], blocking = [], preload = [], themed = true }) {
   const fonts = ['/fonts/geist.woff2', '/fonts/bricolage.woff2', ...preload];
   return `<!DOCTYPE html>
 <html lang="en">
@@ -56,13 +57,11 @@ export function page({ title, description = '', body, bodyClass = '', scripts = 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 ${description ? `<meta name="description" content="${esc(description)}">` : ''}
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#f4f5f2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f1311" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f5f2">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 ${fonts.map((f) => `<link rel="preload" href="${f}" as="font" type="font/woff2" crossorigin>`).join('\n')}
 <link rel="stylesheet" href="${asset('/styles.css')}">
-${blocking.map((s) => `<script src="${asset(s)}"></script>`).join('\n')}
+${(themed ? ['/theme.js', ...blocking] : blocking).map((s) => `<script src="${asset(s)}"></script>`).join('\n')}
 ${scripts.map((s) => `<script type="module" src="${asset(s)}"></script>`).join('\n')}
 </head>
 <body class="${esc(bodyClass)}">
@@ -113,4 +112,8 @@ export function textOn(hex) {
   });
   const L = 0.2126 * r + 0.7152 * g + 0.0722 * b;
   return (L + 0.05) / 0.05 > 1.05 / (L + 0.05) ? '#111413' : '#ffffff';
+}
+
+export function themeToggle() {
+  return raw(`<button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode">${esc(icon('moon', 'icon i-moon'))}${esc(icon('sun', 'icon i-sun'))}</button>`);
 }

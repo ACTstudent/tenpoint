@@ -42,6 +42,7 @@ export function surveyPage({ survey, score, source, email, error }) {
     body,
     bodyClass: 'page-respond',
     scripts: ['/survey.js'],
+    themed: false,
   });
 }
 
@@ -55,7 +56,7 @@ export function thanksPage({ survey }) {
   </div>
   <p class="respond-foot">Survey by <a href="/">Tenpoint</a></p>
 </main>`;
-  return page({ title: 'Thank you', body, bodyClass: 'page-respond' });
+  return page({ title: 'Thank you', body, bodyClass: 'page-respond', themed: false });
 }
 
 export function widgetPreviewPage({ survey }) {

@@ -22,6 +22,7 @@ Tenpoint is free: there are no plans, no card, and no limit on surveys or answer
 - **Slack alerts** for each new answer, through an incoming webhook.
 - **CSV export** of every answer.
 - **Your name and colour** on the survey page and the widget.
+- **Light by default**, with a sun/moon button for dark mode on the site and dashboard. Survey pages your customers see always stay light.
 
 ## Run it on your computer
 
